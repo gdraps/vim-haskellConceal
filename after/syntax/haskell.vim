@@ -36,8 +36,15 @@ endif
 
 " vim: set fenc=utf-8:
 syntax match hsNiceOperator "\\\ze[[:alpha:][:space:]_([]" conceal cchar=λ
-syntax match hsNiceOperator "<-" conceal cchar=←
-syntax match hsNiceOperator "->" conceal cchar=→
+" Preserve horizontal spacing by replacing characters individually
+" syntax match hsNiceOperator "<-" conceal cchar=←
+" syntax match hsNiceOperator "->" conceal cchar=→
+syn match hsLRArrowHead contained ">" conceal cchar= 
+syn match hsLRArrowTail contained "-" conceal cchar=→
+syn match hsLRArrowFull "->" contains=hsLRArrowHead,hsLRArrowTail
+syn match hsRLArrowHead contained "<" conceal cchar=←
+syn match hsRLArrowTail contained "-" conceal cchar= 
+syn match hsRLArrowFull "<-" contains=hsRLArrowHead,hsRLArrowTail
 syntax match hsNiceOperator "\<sum\>" conceal cchar=∑
 syntax match hsNiceOperator "\<product\>" conceal cchar=∏ 
 syntax match hsNiceOperator "\<sqrt\>" conceal cchar=√ 
@@ -75,7 +82,10 @@ if s:extraConceal
 
     " Redfining to get proper '::' concealing
     syntax match hs_DeclareFunction /^[a-z_(]\S*\(\s\|\n\)*::/me=e-2 nextgroup=hsNiceOperator contains=hs_FunctionName,hs_OpFunctionName
-    syntax match hsNiceOperator "\:\:" conceal cchar=∷
+    " Preserve horizontal spacing by replacing characters individually
+    " syntax match hsNiceOperator "\:\:" conceal cchar=∷
+    syn match hsTypeDef1 contained "\:" conceal cchar=:
+    syn match hsTypeDef "\:\:" contains=hsTypeDef1
 
     syntax match hsniceoperator "++" conceal cchar=⧺
     syntax match hsNiceOperator "\<forall\>" conceal cchar=∀
