@@ -51,7 +51,8 @@ syntax match hsNiceOperator "\<sqrt\>" conceal cchar=√
 syntax match hsNiceOperator "\<pi\>" conceal cchar=π
 syntax match hsNiceOperator "==" conceal cchar=≡
 syntax match hsNiceOperator "\/=" conceal cchar=≠
-syntax match hsNiceOperator ">>" conceal cchar=»
+syntax match hsNiceOperator ">>[^>]" conceal cchar=»
+" syntax match hsNiceOperator ">>>" conceal cchar=⋙
 syntax match hsNiceOperator "<<" conceal cchar=«
 
 let s:extraConceal = 1
